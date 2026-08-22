@@ -1,0 +1,15 @@
+[project]
+name = "obiagent"
+version = "0.1.0"
+description = "Obsidian notebook management agent"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "nexus",
+    "rich>=15.0.0",
+]
+
+[tool.uv.sources]
+nexus = { path = "../../Project Workspace/Python Packages/Nexus", editable = true }
+
+
