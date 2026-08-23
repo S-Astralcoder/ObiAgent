@@ -20,10 +20,10 @@ class AgentCLI:
     def start_agent_cli(self):
         self.console.print(f"[green]{'='*10}Welcome to ObiAgent CLI{'='*10}")
         while True:
-            message = Prompt.ask("[blue]Let's Chat[bold white]", default="exit")
-            if message.lower().strip() == "exit":
+            message = Prompt.ask("[blue]Let's Chat[bold white]", default="/exit")
+            if message.lower().strip() == "/exit":
                 return
-            if message.lower().strip() == "$load":
+            if message.lower().strip() == "/load-vault":
                 self.vault_embedding.load_vault_data_to_vector_database(mode="active")
                 continue
             response = obi_agent.run_agent(message=message)

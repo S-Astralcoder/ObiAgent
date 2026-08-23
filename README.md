@@ -55,8 +55,8 @@ Once you have initialized the agent, you can interact with it through natural la
 ### Special Commands
 While the agent supports natural language processing, you can use these special commands to manage the interaction session directly:
 
-- `$load`: Force a re-indexing (active reload) of your vault data into the vector database.
-- `exit`: Terminate the current session and close the agent.
+- `/load-vault`: Force a re-indexing (active reload) of your vault data into the vector database.
+- `/exit`: Terminate the current session and close the agent.
 
 ### Workflow Example
 1. Launch the agent using `uv run python main.py`.
@@ -65,29 +65,7 @@ While the agent supports natural language processing, you can use these special 
 
 > [!IMPORTANT]
 > The agent performs direct filesystem operations. Always ensure you have a backup of your vault before performing bulk edits or deletions.
-## 💡 How to Use ObiAgent
 
-Once you have initialized the agent, you can interact with it through natural language commands in your terminal. ObiAgent is designed to perform operations directly on your Obsidian vault files.
-
-### Common Patterns
-- **File Management**: You can request tasks such as "Create a note about project XYZ" or "Update the task list in the work-notes file."
-- **Retrieval**: Use queries like "Find all notes related to my meeting last week" to leverage semantic search.
-- **Vault Maintenance**: Ask the agent to list folder contents or summarize specific files.
-
-### Workflow Example
-1. Launch the agent using `uv run python main.py`.
-2. When prompted, provide your specific request.
-
-### Special Commands
-While the agent supports natural language processing, you can use these special commands to manage the interaction session directly:
-
-- `exit` or `quit`: Terminate the current session and close the agent.
-- `help`: Display a list of available functionalities and usage tips.
-- `clear`: Clear the current chat history to start a fresh interaction session.
-4. Review the agent's output in the terminal to confirm the action was successful.
-
-> [!IMPORTANT]
-> The agent performs direct filesystem operations. Always ensure you have a backup of your vault before performing bulk edits or deletions.
 ---
 
 ## 🏗 Technical Stack
