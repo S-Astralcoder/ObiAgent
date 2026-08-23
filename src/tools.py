@@ -1,13 +1,23 @@
+import os
 import pathlib
 from typing import Literal
 
 from nexus.tool_registry import ToolRegistry
-
+from dotenv import load_dotenv
 from src.safety import check_inside_working_directory
+from src.share import model, client
 
+load_dotenv()
 
 tool_registry = ToolRegistry()
 
+
+
+
+@tool_registry.add_tool()
+def semantic_search(query : str):
+    result = client.query_points(collection_name=os.environ["COLLECTION_NAME"], query=model.encode(query), limit=3).points
+    return [[data.payload, data.score] for data in result]
 
 
 @tool_registry.add_tool()
@@ -33,7 +43,7 @@ def read_file(file_path : str):
     if not path.is_file():
         return "[ERROR] : The given path doesn't point to type file. please give a valid path that points to a file"
     check_inside_working_directory(path=path)
-    with open(path, "r") as file:
+    with open(path, "r", encoding="utf-8") as file:
         file_content = ""
         file_line_content = file.readlines()
         for index, line in enumerate(file_line_content):
@@ -58,7 +68,7 @@ def edit_file(file_path : str, index : int ,content : str, operation : str):
     if not path.is_file():
         return "[ERROR] : The given path doesn't point to type file. please give a valid path that points to a file"
     check_inside_working_directory(path=path)
-    with open(path, "r") as file:
+    with open(path, "r", encoding="utf-8") as file:
         file_line_content = file.readlines()
         if index >= len(file_line_content):
             return "[ERROR] : Out of existing file lines scope"
@@ -81,7 +91,7 @@ def remove_file_line(file_path : str, index : int):
     if not path.is_file():
         return "[ERROR] : The given path doesn't point to type file. please give a valid path that points to a file"
     check_inside_working_directory(path=path)
-    with open(path, "r") as file:
+    with open(path, "r", encoding="utf-8") as file:
         file_line_content = file.readlines()
         if index > len(file_line_content):
             return "[ERROR] : Out of existing file lines scope"
@@ -100,6 +110,6 @@ def write_file(file_path : str, content : str, over_write : bool):
     if not path.is_file():
         return "[ERROR] : The given path doesn't point to type file. please give a valid path that points to a file"
     check_inside_working_directory(path=path)
-    with open(path, "w" if over_write else "a") as file:
+    with open(path, "w" if over_write else "a", encoding="utf-8") as file:
         file.write(content)
     return "[PASSED] Successfully applied changes"

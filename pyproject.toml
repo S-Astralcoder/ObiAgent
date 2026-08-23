@@ -6,7 +6,9 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "nexus",
+    "qdrant-client>=1.19.0",
     "rich>=15.0.0",
+    "sentence-transformers>=6.0.0",
 ]
 
 [tool.uv.sources]
